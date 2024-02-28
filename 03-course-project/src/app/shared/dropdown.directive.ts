@@ -27,3 +27,18 @@ export class DropdownDirective {
     this.isOpen = !this.isOpen;
   }
 }
+
+// For dropdown closing when click outside of element (lecturer solution):
+
+// @Directive({
+//   selector: '[appDropdown]',
+// })
+// export class DropdownDirective {
+//   @HostBinding('class.open') isOpen = false;
+//   @HostListener('document:click', ['$event']) toggleOpen(event: Event) {
+//     this.isOpen = this.elRef.nativeElement.contains(event.target)
+//       ? !this.isOpen
+//       : false;
+//   }
+//   constructor(private elRef: ElementRef) {}
+// }
