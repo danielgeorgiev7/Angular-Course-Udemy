@@ -1,16 +1,12 @@
 import { Injectable } from '@angular/core';
 
-// ? Not important for application. Just a demo for understanding services
-// @Injectable({
-//   providedIn: 'root',
-// })
+// @Injectable({ providedIn: 'root' })
 export class LoggingService {
-  lastLog: string;
-  constructor() {}
+  lastlog: string;
 
   printLog(message: string) {
     console.log(message);
-    console.log(this.lastLog);
-    this.lastLog = message;
+    console.log(this.lastlog);
+    this.lastlog = message;
   }
 }

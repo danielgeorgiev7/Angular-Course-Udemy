@@ -1,13 +1,12 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { map, tap, take, exhaustMap } from 'rxjs/operators';
+
+import { Recipe } from '../recipes/recipe.model';
 import { RecipeService } from '../recipes/recipe.service';
-import { Recipe } from '../recipes/recipes.model';
-import { map, tap } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable({ providedIn: 'root' })
 export class DataStorageService {
   constructor(
     private http: HttpClient,
@@ -19,29 +18,29 @@ export class DataStorageService {
     const recipes = this.recipeService.getRecipes();
     this.http
       .put(
-        'https://carbide-kite-374923-default-rtdb.europe-west1.firebasedatabase.app/recipes.json',
+        'https://angular-test-fd57f-default-rtdb.firebaseio.com/recipes.json',
         recipes
       )
-      .subscribe((recipes) => {
-        console.log(recipes);
+      .subscribe(response => {
+        console.log(response);
       });
   }
 
   fetchRecipes() {
     return this.http
       .get<Recipe[]>(
-        'https://carbide-kite-374923-default-rtdb.europe-west1.firebasedatabase.app/recipes.json'
+        'https://angular-test-fd57f-default-rtdb.firebaseio.com/recipes.json'
       )
       .pipe(
-        map((recipes) =>
-          recipes.map((recipes) => {
+        map(recipes => {
+          return recipes.map(recipe => {
             return {
-              ...recipes,
-              ingredients: recipes.ingredients ? recipes.ingredients : [],
+              ...recipe,
+              ingredients: recipe.ingredients ? recipe.ingredients : []
             };
-          })
-        ),
-        tap((recipes) => {
+          });
+        }),
+        tap(recipes => {
           this.recipeService.setRecipes(recipes);
         })
       );

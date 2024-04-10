@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+
 import { AlertComponent } from './alert/alert.component';
 import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
-import { PlaceholderDirective } from './placeholder.directive';
+import { PlaceholderDirective } from './placeholder/placeholder.directive';
 import { DropdownDirective } from './dropdown.directive';
-import { CommonModule } from '@angular/common';
 import { LoggingService } from '../logging.service';
 
 @NgModule({
@@ -11,7 +12,7 @@ import { LoggingService } from '../logging.service';
     AlertComponent,
     LoadingSpinnerComponent,
     PlaceholderDirective,
-    DropdownDirective,
+    DropdownDirective
   ],
   imports: [CommonModule],
   exports: [
@@ -19,10 +20,8 @@ import { LoggingService } from '../logging.service';
     LoadingSpinnerComponent,
     PlaceholderDirective,
     DropdownDirective,
-    CommonModule,
+    CommonModule
   ],
-  // ? Not important for application. Just a demo for understanding services
-  // ! Service has different instance than app module, despite SharedModule being provided there because SharedModule is also provided in a lazy-loaded module!
-  providers: [LoggingService],
+  providers: [LoggingService]
 })
 export class SharedModule {}

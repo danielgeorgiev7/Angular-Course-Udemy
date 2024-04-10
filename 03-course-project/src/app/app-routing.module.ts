@@ -1,9 +1,8 @@
 import { NgModule } from '@angular/core';
-import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/recipes', pathMatch: 'full' },
-  // ! Important: Lazy loaded services that are not provided in root have different instances in each module
   {
     path: 'recipes',
     loadChildren: () =>
